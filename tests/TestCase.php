@@ -3,7 +3,6 @@
 namespace Corcel\Tests;
 
 use Corcel\Laravel\CorcelServiceProvider;
-use Corcel\Model\User;
 use Corcel\Tests\Unit\Model\FakePage;
 use Corcel\Tests\Unit\Model\FakePost;
 use Corcel\Tests\Unit\Model\FakeShortcode;
@@ -42,7 +41,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getEnvironmentSetUp($app)
     {
         $this->configureDatabaseConfig($app);
-        $this->configureAuthProvider($app);
         $this->configureCustomPostTypes($app);
         $this->configureShortcodes($app);
     }
@@ -65,17 +63,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
         ]);
 
         $app['config']->set('database.default', 'wp');
-    }
-
-    /**
-     * @param \Illuminate\Foundation\Application $app
-     */
-    private function configureAuthProvider($app)
-    {
-        $app['config']->set('auth.providers.users', [
-            'driver' => 'corcel',
-            'model' => User::class,
-        ]);
     }
 
     /**

@@ -24,7 +24,6 @@ class CorcelServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishConfigFile();
-        $this->registerAuthProvider();
     }
 
     /**
@@ -35,16 +34,6 @@ class CorcelServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/config.php' => base_path('config/corcel.php'),
         ]);
-    }
-
-    /**
-     * @return void
-     */
-    private function registerAuthProvider()
-    {
-        Auth::provider('corcel', function ($app, array $config) {
-            return new AuthUserProvider($config);
-        });
     }
 
     /**
